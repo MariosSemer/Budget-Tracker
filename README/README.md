@@ -1,4 +1,4 @@
-# Budget Tracker
+# Budget Tracker Application
 
 A small single-user HTTP API, written in Go, for recording every income and expense as it happens, so I can see my balance, where my money goes, and how much I save each month.
 
