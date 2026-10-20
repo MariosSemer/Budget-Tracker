@@ -1,22 +1,27 @@
 package main
 
 import (
-	"net/http"
-
-	"BudgetTrucker/internal/httpapi"
-	slogger "BudgetTrucker/internal/logger"
+	"log/slog"
+	"os"
 )
 
 func main() {
+	cfg := config{
+		addr: ":8080",
+		db:   dbConfig{},
+	}
 
-	log := slogger.New()
+	api := application{
+		config: cfg,
+	}
 
-	mux := http.NewServeMux()
+	//logger
+	logger := slog.New(slog.NewTextHandler(os.Stdout, nil))
 
-	mux.HandleFunc("GET /health", httpapi.HealthHandler)
+	slog.SetDefault(logger)
 
-	log.Info("Server listening on http://localhost:8080")
-	if err := http.ListenAndServe(":8080", mux); err != nil {
-		log.Error("server crashed", "error", err)
+	if err := api.run(api.mount()); err != nil {
+		slog.Error("server had failed t start", "error", err)
+		os.Exit(1)
 	}
 }

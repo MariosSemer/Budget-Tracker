@@ -4,12 +4,11 @@ A small single-user HTTP API, written in Go, for recording every income and expe
 
 ## Overview
 
-| | |
-|---|---|
-| Users | One (no accounts or login in the first version; a CLI and multi-user support may come later) |
-| Currency | One (euro) |
-| Storage | In memory first, behind an interface; SQL (or a CSV file) can be added later |
-| Language | Go 1.22 or newer (needed for method patterns in `net/http` routes) |
+|----------|----------------------------------------------------------------------------------------------|
+| Users    | One (no accounts or login in the first version; a CLI and multi-user support may come later) |
+| Currency | One (euro)                                                                                   |
+| Storage  | In memory first, behind an interface; SQL (or a CSV file) can be added later                 |
+| Language | Go 1.22 or newer (needed for method patterns in `net/http` routes)                           |
 
 ### Conventions used everywhere
 
@@ -24,29 +23,29 @@ A small single-user HTTP API, written in Go, for recording every income and expe
 
 Every category goes in exactly one direction, so the category alone decides whether a transaction is income or expense. There is no separate type field.
 
-| Category | Direction |
-|---|---|
-| `groceries` | expense |
-| `bills` | expense |
-| `entertainment` | expense |
-| `cat` | expense |
-| `cigarettes` | expense |
-| `other_expense` | expense |
-| `salary` | income |
-| `family_received` | income |
-| `other_income` | income |
+|      Category     | Direction |
+|-------------------|-----------|
+|    `groceries`    |  expense  |
+|      `bills`      |  expense  |
+|  `entertainment`  |  expense  |
+|       `cat`       |  expense  |
+|    `cigarettes`   |  expense  |
+|  `other_expense`  |  expense  |
+|      `salary`     |  income   |
+| `family_received` |  income   |
+|   `other_income`  |  income   |
 
 The list lives in one place in the code (a map from category to direction). Adding a category is one constant plus one map entry.
 
 ### Transaction
 
-| Field | Type | Notes |
-|---|---|---|
-| `id` | int64 | Assigned by the store, never by the caller |
-| `category` | Category | Must be one of the categories above |
-| `amount` | int64 | Cents, always positive |
-| `date` | date | The day it happened |
-| `description` | string | Optional (Beer, Coffee, Supermarket) |
+|     Field     |   Type   |                    Notes                   |
+|---------------|----------|--------------------------------------------|
+|      `id`     |   int64  | Assigned by the store, never by the caller |
+|   `category`  | Category |     Must be one of the categories above    |
+|    `amount`   |   int64  |           Cents, always positive           |
+|     `date`    |   date   |             The day it happened            |
+| `description` |  string  |    Optional (Beer, Coffee, Supermarket)    |
 
 Responses also include a derived `kind` (`income` or `expense`) on every transaction.
 

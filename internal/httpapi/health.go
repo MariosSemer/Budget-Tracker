@@ -3,7 +3,6 @@ package httpapi
 import (
 	"fmt"
 	"net/http"
-	//"BudgetTrucker/internal/slogger"
 )
 
 func HealthHandler(w http.ResponseWriter, r *http.Request) {
