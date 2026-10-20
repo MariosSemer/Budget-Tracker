@@ -2,12 +2,20 @@ package httpapi
 
 import (
 	"fmt"
+	"log/slog"
 	"net/http"
 )
 
-func HealthHandler(w http.ResponseWriter, r *http.Request) {
+type HealthHandler struct {
+	Logger *slog.Logger
+}
+
+func (h *HealthHandler) Check(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "text/plain")
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintln(w, "ok")
+
+	if _, err := fmt.Fprintln(w, "ok"); err != nil {
+		h.Logger.Error("Health check write failed", "error", err)
+	}
 }

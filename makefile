@@ -5,6 +5,9 @@ SHELL = $(if $(wildcard $(SHELL_PATH)),/bin/ash,/bin/bash)
 run:
 	go run cmd/api/*.go
 
+build:
+	go build ./...
+
 tidy:
 	go mod tidy
 	go mod vendor
