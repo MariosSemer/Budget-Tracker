@@ -8,7 +8,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 
-	"budgettracker/internal/httpapi"
+	handlers "budgettracker/internal/httpapi"
 )
 
 // middleware logger
@@ -54,7 +54,7 @@ func (app *application) mount() http.Handler {
 	// processing should be stopped.
 	r.Use(middleware.Timeout(60 * time.Second))
 
-	healthHandler := &httpapi.HealthHandler{}
+	healthHandler := &handlers.HealthHandler{}
 	r.Get("/health", healthHandler.Check)
 
 	return r
