@@ -7,10 +7,10 @@ import (
 )
 
 type AddHandler struct {
-	logger *slog.Logger
+	Logger *slog.Logger
 }
 
-func (h *HealthHandler) AddHandler(w http.ResponseWriter, r *http.Request) {
+func (h *AddHandler) AddFunc(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "text/plain")
 	w.WriteHeader(http.StatusOK)

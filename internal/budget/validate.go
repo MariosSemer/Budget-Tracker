@@ -9,7 +9,7 @@ import (
 
 func AddValidation(req *Transaction, today time.Time) error {
 
-	req.Category = Category(strings.TrimSpace(string(req.Category)))
+	req.Category = Category(Normalise(string(req.Category)))
 
 	if req.Category == "" {
 		return errors.New("Category is required.")
@@ -23,13 +23,12 @@ func AddValidation(req *Transaction, today time.Time) error {
 		return errors.New("Amount must be positive.")
 	}
 
-	parsedDate, err := time.Parse("2026-01-02", req.Date)
-	if err != nil || parsedDate.Format("2026-01-02") != req.Date {
-		return errors.New("Date must be YYYY-MM-DD.")
+	parsedDate, err := ParseDate(req.Date)
+	if err != nil {
+		return err
 	}
 
-	todayString := today.Format("2026-01-02")
-	if req.Date > todayString {
+	if parsedDate.After(today) {
 		return errors.New("Date cannot be in the future.")
 	}
 

@@ -1,0 +1,32 @@
+[
+    {
+        "name": "income only",
+        "transactions": [
+            {"category": "salary", "amount": 10000}
+        ],
+        "want": 10000
+    },
+    {
+        "name": "multiple transactions",
+        "transactions": [
+            {"category": "salary",        "amount": 10000, "date": "2026-10-01", "description": "Decathlon"},
+            {"category": "entertainment", "amount": 200,   "date": "2026-10-02", "description": "Coffee"},
+            {"category": "groceries",     "amount": 2500,  "date": "2026-10-03", "description": "Sklavenitis"},
+            {"category": "bills",         "amount": 2500,  "date": "2026-10-04", "description": "Reuma"}
+        ],
+        "want": 4800
+    },
+    {
+        "name": "empty store",
+        "transaction": [],
+        "want": 0
+    },
+    {
+        "name": "uknown category",
+        "transactions": [
+            {"category": "salary",   "amount": 1000},
+            {"category": "nonsense", "amount": 999}
+        ],
+        "want": 1000
+    }
+]

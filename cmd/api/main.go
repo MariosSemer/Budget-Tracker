@@ -1,6 +1,6 @@
 package main
 
-import (
+/*import (
 	"log/slog"
 	"os"
 )
@@ -25,4 +25,4 @@ func main() {
 		slog.Error("server had failed t start", "error", err)
 		os.Exit(1)
 	}
-}
+}*/

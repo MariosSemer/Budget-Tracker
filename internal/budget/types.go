@@ -38,7 +38,7 @@ var categoryKind = map[Category]Kind{
 
 // Kind returns the category's direction. ok is false for an unknown category.
 func (c Category) Kind() (kind Kind, ok bool) {
-	kind, ok = categoryKind[c]
+	kind, ok = categoryKind[Category(Normalise(string(c)))]
 	return kind, ok
 }
 
